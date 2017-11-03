@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDW Experiment", "RDW Experiment.csproj", "{31877B44-9159-E55A-9008-AA35A38A238C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDW Experiment.Editor", "RDW Experiment.Editor.csproj", "{EB68898E-0190-7FF7-054D-B18B635F5E6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31877B44-9159-E55A-9008-AA35A38A238C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31877B44-9159-E55A-9008-AA35A38A238C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31877B44-9159-E55A-9008-AA35A38A238C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31877B44-9159-E55A-9008-AA35A38A238C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB68898E-0190-7FF7-054D-B18B635F5E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB68898E-0190-7FF7-054D-B18B635F5E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB68898E-0190-7FF7-054D-B18B635F5E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB68898E-0190-7FF7-054D-B18B635F5E6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
