@@ -267,11 +267,11 @@ MonoBehaviour:
     type: 2}
   PaintingPrefab: {fileID: 1074599435128170, guid: 7df506f622f73f24cbd6cbfeb6d73517,
     type: 2}
-  MotionSicknessPrefab: {fileID: 1804595182114100, guid: b9bcd384d409daf4e96ce0697d780b36,
+  MotionSicknessPrefab: {fileID: 1730225496158938, guid: 3a2133aa6c8e0644facec449c67cd360,
     type: 2}
-  LeftPathPrefab: {fileID: 1969509509850840, guid: 2a6ce2f1102ab1d45be53f7b0b9f41bb,
+  LeftPathPrefab: {fileID: 1283624776061666, guid: b3eb641781189ab409b052a1dfb20912,
     type: 2}
-  RightPathPrefab: {fileID: 1457709644518994, guid: d407043dd3cf9fc4b9f9f69fcf15fbdf,
+  RightPathPrefab: {fileID: 1776485848714756, guid: d9e7860f4ae881f4e8566dce696c6d8a,
     type: 2}
   EndpointPrefab: {fileID: 1736835046430204, guid: 0455ce3a61973304883f1e1e5e9d697e,
     type: 2}

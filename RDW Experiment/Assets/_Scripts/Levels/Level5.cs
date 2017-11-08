@@ -16,11 +16,15 @@ public class Level5 : MonoBehaviour
     private float negativeAvg;
     private float positiveAlg;
     private float negativeAlg;
+    private float gain;
     private Feedback response;
 
     private GameObject path;
     private GameObject endpoint;
     private GameObject buttons;
+    private GameObject fms;
+
+    private bool playonce;
 
     void Start()
     {
@@ -29,20 +33,31 @@ public class Level5 : MonoBehaviour
 
         _startingEdge = LevelUtilities.ChooseRandomEdge();
         _turnLeft = LevelUtilities.GenerateRandomBool();
+
         Manager.Spawn.PurpleFeet(_startingEdge);
         FeetObject.OnCollision += Feet;
         Pointer.Click += Touchpad;
-        
+
         useIndividualized = LevelUtilities.GenerateRandomBool();
         usePositive = LevelUtilities.GenerateRandomBool();
         Manager.Sound.PlayNextVoiceover(2.0f); //#13 position & follow path
         count = 0;
         totalCount = 0;
-        Manager.Experiment.GetWalkthroughAlgorithm(out algorithm);
-        Manager.Experiment.GetThreshold(algorithm, out positiveAlg, out negativeAlg);
+
+        //Manager.Experiment.GetWalkthroughAlgorithm(out algorithm);
+        //Manager.Experiment.GetThreshold(algorithm, out positiveAlg, out negativeAlg);
+
+        algorithm = AlgorithmType.PEST;
+        Manager.Experiment.SetThresholdPEST(0.553f, -0.28f);
+        Manager.Experiment.SetThresholdStaircase(0.553f, -0.28f);
+
         negativeAvg = -0.2f;
         positiveAvg = 0.4f;
-        SetupFMS();
+        positiveAlg = 0.553f;
+        negativeAlg = -0.28f;
+        gain = 0;
+        SetupFMSFile();
+        playonce = true;
     }
 
     private void Feet()
@@ -53,26 +68,33 @@ public class Level5 : MonoBehaviour
 
     private void Endpoint()
     {
+        FindObjectOfType<Controller>().SetGain(0);
+        gain = 0;
         ++count;
         ++totalCount;
         EndpointObject.OnCollision -= Endpoint;
         endpoint.SetActive(false);
+
         Manager.Spawn.MoveDiscernmentButtons(buttons, _endingEdge);
         buttons.SetActive(true);
-        Manager.Sound.PlaySpecificVoiceover(12);
+        if (playonce)
+        {
+            Manager.Sound.PlaySpecificVoiceover(12);
+            playonce = false;
+        }
+
     }
 
     private void SetupInitialPath()
     {
+        SetupFile();
         _endingEdge = LevelUtilities.EndpointEdge(_startingEdge, _turnLeft);
         Manager.Spawn.Path(_turnLeft, _startingEdge, out path);
         Manager.Spawn.Endpoint(_endingEdge, out endpoint);
-
         Manager.Spawn.DiscernmentButtons(_endingEdge, out buttons);
         buttons.SetActive(false);
         EndpointObject.OnCollision += Endpoint;
 
-        float gain = 0;
         if (useIndividualized)
         {
             gain = usePositive ? positiveAlg : negativeAlg;
@@ -85,8 +107,10 @@ public class Level5 : MonoBehaviour
 
     private void SetupPath()
     {
+        path.SetActive(true);
         Manager.Sound.PlaySpecificVoiceover(13);
         _turnLeft = !_turnLeft;
+        _startingEdge = _endingEdge;
 
         if (count == 2)
         {
@@ -99,7 +123,6 @@ public class Level5 : MonoBehaviour
             usePositive = !usePositive;
         }
 
-        float gain = 0;
         if (useIndividualized)
         {
             gain = usePositive ? positiveAlg : negativeAlg;
@@ -107,9 +130,11 @@ public class Level5 : MonoBehaviour
         else
             gain = usePositive ? positiveAvg : negativeAvg;
 
+        Debug.Log(gain);
         FindObjectOfType<Controller>().SetGain(gain);
+
         _endingEdge = LevelUtilities.EndpointEdge(_startingEdge, _turnLeft);
-        Manager.Spawn.MoveEndpoint(_endingEdge, endpoint);
+        Manager.Spawn.Endpoint(_endingEdge, out endpoint);
         endpoint.SetActive(true);
         EndpointObject.OnCollision += Endpoint;
     }
@@ -121,25 +146,23 @@ public class Level5 : MonoBehaviour
         switch (type)
         {
             case ObjectType.FMS:
+                UpdateFMS();
+                if (totalCount == 4 && !isFinal)
+                {
+                    Pointer.Click -= Touchpad;
+                    Manager.SceneSwitcher.LoadNextScene(SceneName.Four);
+                }
+                fms.SetActive(false);
+                SetupPath();
                 break;
             case ObjectType.SameButton:
                 response = Feedback.Same;
-                if (totalCount == 4 && !isFinal)
-                {
-                    Manager.SceneSwitcher.LoadNextScene(SceneName.Four);
-
-                }
-                buttons.SetActive(false);
-                SetupPath();
+                UpdateFile();
+                SetupFMS();
                 break;
             case ObjectType.DifferentButton:
                 response = Feedback.Different;
-                if (totalCount == 4 && !isFinal)
-                {
-                    Manager.SceneSwitcher.LoadNextScene(SceneName.Four);
-                }
-                buttons.SetActive(false);
-                SetupPath();
+                SetupFMS();
                 break;
             case ObjectType.ContinueButton:
                 break;
@@ -150,6 +173,17 @@ public class Level5 : MonoBehaviour
 
     private void SetupFMS()
     {
+        path.SetActive(false);
+        endpoint.SetActive(false);
+        buttons.SetActive(false);
+
+        fms.SetActive(true);
+    }
+
+    private void SetupFMSFile()
+    {
+        Manager.Spawn.MotionSicknessUI(out fms);
+        fms.SetActive(false);
         System.DateTime now = System.DateTime.Now;
         string line = "\nWALKTHROUGH PHASE\n" +
                       "Algorithm: " + (algorithm == AlgorithmType.Staircase ? "Staircase" : "PEST") + "\n" +
@@ -157,16 +191,38 @@ public class Level5 : MonoBehaviour
         Manager.Experiment.WriteToFMS(line);
     }
 
-    private void UpdateFMS(int FMS)
+    private void UpdateFMS()
     {
-        float gain;
-        FindObjectOfType<Controller>().GetGain(out gain);
+        float rating;
+        FindObjectOfType<FMS>().GetRating(out rating);
         string line = "Individualized: " + (useIndividualized ? "Yes" : "No") + "\n" +
                       "Positive Threshold: " + (usePositive ? "Yes" : "No") + "\n" +
                       "Gain Applied: " + gain.ToString() + "\n" +
                       "Response: " + (response == Feedback.Same ? "Same" : "Different") + "\n" +
-                      "FMS: " + FMS + "\n";
+                      "FMS: " + rating + "\n";
         Manager.Experiment.WriteToFMS(line);
     }
 
+    private void SetupFile()
+    {
+        System.DateTime now = System.DateTime.Now;
+        string line = "Walkthrough PHASE \n" +
+                      "Algorithm: " + (algorithm == AlgorithmType.Staircase ? "Staircase" : "PEST") + "\n" +
+                      "Start Time: " + now.Hour.ToString() + ":" + now.Minute.ToString() + "\n" +
+                      "Turn direction: " + (_turnLeft ? "Left" : "Right") + "\n" +
+                      "Turn count: " + totalCount + "\n";
+        Manager.Experiment.WriteToFile(line);
+    }
+
+    private void UpdateFile()
+    {
+        System.DateTime now = System.DateTime.Now;
+        string line = "Time: " + now.Hour.ToString() + ":" + now.Minute.ToString() + "\n" +
+                      "Response: " + (Manager.Algorithm.Response == Feedback.Same ? "Same" : "Different") + "\n" +
+                      "Gain applied: " + gain.ToString() + "\n" +
+                      "Individualized gain used: " + (useIndividualized ? "Yes" : "No") + "\n" +
+                      "Turn direction: " + (_turnLeft ? "Left" : "Right") + "\n" +
+                      "Turn count: " + totalCount + "\n";
+        Manager.Experiment.WriteToFile(line);
+    }
 }

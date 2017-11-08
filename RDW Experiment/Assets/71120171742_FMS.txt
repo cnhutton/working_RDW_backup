@@ -1,0 +1,17 @@
+Participant: 71120171742
+Date: 7/11/2017
+Start Time: 17:42
+
+
+
+WALKTHROUGH PHASE
+Algorithm: PEST
+Start Time: 17:43
+
+
+Individualized: Yes
+Positive Threshold: Yes
+Gain Applied: 0
+Response: Same
+FMS: 3
+

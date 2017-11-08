@@ -22,6 +22,7 @@ public class Level4 : MonoBehaviour
     private GameObject _discernmentWest;
     private GameObject _arrowLeft;
     private GameObject _arrowRight;
+    private GameObject fms;
 
     private AlgorithmType _algorithm;
 
@@ -43,13 +44,14 @@ public class Level4 : MonoBehaviour
         Manager.Algorithm.Initialize(_algorithm);
         Manager.Sound.PlayNextVoiceover(); //#9 Experiment now begins, go to feet
         Pointer.Click += Touchpad;
-        SetupInitialCalibration();
+        
     }
 
     // ReSharper disable once MemberCanBeMadeStatic.Local
     private void Feet()
     {
         FeetObject.OnCollision -= Feet;
+        SetupInitialCalibration();
     }
 
     private void SetupInitialCalibration()
@@ -108,6 +110,8 @@ public class Level4 : MonoBehaviour
         switch (type)
         {
             case ObjectType.FMS:
+                Pointer.Click -= Touchpad;
+                Manager.SceneSwitcher.LoadNextScene(SceneName.Five);
                 break;
             case ObjectType.SameButton:
                 Manager.Algorithm.Response = Feedback.Same;
@@ -126,9 +130,15 @@ public class Level4 : MonoBehaviour
 
     private void Completed()
     {
+        _paintingEast.SetActive(false);
+        _paintingWest.SetActive(false);
+        _discernmentEast.SetActive(false);
+        _discernmentWest.SetActive(false);
+        _arrowLeft.SetActive(false);
+        _arrowRight.SetActive(false);
+
         CompleteFile();
-        Manager.SceneSwitcher.LoadNextScene(SceneName.Five);
-        //Manager.Spawn.MotionSicknessUI();
+        SetupFMS();
     }
 
     private void SetupFile()
@@ -161,12 +171,7 @@ public class Level4 : MonoBehaviour
                       "Current Gain: " + gain.ToString() + "\n";
         Manager.Experiment.WriteToFile(line);
     }
-
-    //private void UpdateFMSFile()
-    //{
-
-    //}
-
+   
     private void CompleteFile()
     {
         System.DateTime now = System.DateTime.Now;
@@ -188,4 +193,23 @@ public class Level4 : MonoBehaviour
         Room.transform.RotateAround(Vector3.zero, axis, angle);
         SteamVR_Fade.Start(Color.clear, 1.2f);
     }
+
+    private void SetupFMS()
+    {
+        Manager.Spawn.MotionSicknessUI(out fms);
+        System.DateTime now = System.DateTime.Now;
+        string line = "\nWALKTHROUGH PHASE\n" +
+                      "Algorithm: " + (_algorithm == AlgorithmType.Staircase ? "Staircase" : "PEST") + "\n" +
+                      "Start Time: " + now.Hour.ToString() + ":" + now.Minute.ToString() + "\n\n";
+        Manager.Experiment.WriteToFMS(line);
+    }
+
+    private void UpdateFMS()
+    {
+        float rating;
+        FindObjectOfType<FMS>().GetRating(out rating);
+        string line = "FMS: " + rating + "\n";
+        Manager.Experiment.WriteToFMS(line);
+    }
+
 }

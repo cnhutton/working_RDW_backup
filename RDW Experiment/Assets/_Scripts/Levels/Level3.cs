@@ -42,7 +42,7 @@ public class Level3 : MonoBehaviour
         Pointer.Click += Touchpad;
         Manager.Sound.PlayNextVoiceover(); //#7 calibration info
         SetupInitialCalibration();
-        Manager.Sound.PlayNextVoiceover(5.5f); //#8 after turning
+        Manager.Sound.PlayNextVoiceover(5f); //#8 after turning
     }
 
     private void SetupInitialCalibration()
@@ -117,6 +117,7 @@ public class Level3 : MonoBehaviour
                 SetupCalibration();
                 break;
             case ObjectType.ContinueButton:
+                Pointer.Click -= Touchpad;
                 Manager.SceneSwitcher.LoadNextScene(SceneName.Four);
                 break;
             default:

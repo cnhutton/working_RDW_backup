@@ -20,17 +20,19 @@ public class Level2 : MonoBehaviour
         _completed = false;
 
         _startingEdge = LevelUtilities.ChooseRandomEdge();
+        _turnLeft = LevelUtilities.GenerateRandomBool();
+
         Manager.Spawn.PurpleFeet(_startingEdge);
         FeetObject.OnCollision += Feet;
         Pointer.Click += Touchpad;
-        _turnLeft = LevelUtilities.GenerateRandomBool();
+        
         Manager.Sound.PlayNextVoiceover(2.0f);
     }
 
     private void Feet()
     {
         FeetObject.OnCollision -= Feet;
-        StartCoroutine(SetupPath(0.0f));
+        StartCoroutine(SetupPath(1.0f));
         Manager.Sound.PlayNextVoiceover(1.0f); //voiceover #3
     }
 
@@ -64,8 +66,8 @@ public class Level2 : MonoBehaviour
             case ObjectType.DifferentButton:
                 break;
             case ObjectType.ContinueButton:
+                Pointer.Click -= Touchpad;
                 Manager.SceneSwitcher.LoadNextScene(SceneName.Three);
-                Debug.LogError("Scene 2 continue reached");
                 break;
             default:
                 throw new ArgumentOutOfRangeException("type", type, null);
@@ -79,7 +81,7 @@ public class Level2 : MonoBehaviour
         Manager.Spawn.Path(_turnLeft, _startingEdge);
         Manager.Spawn.Endpoint(_endingEdge);
         EndpointObject.OnCollision += Endpoint;
-        StartCoroutine(SetGain(1.0f));
+        StartCoroutine(SetGain(2.0f));
     }
 
     private IEnumerator SetGain(float delay)

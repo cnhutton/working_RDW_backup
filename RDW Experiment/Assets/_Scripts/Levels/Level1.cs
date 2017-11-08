@@ -38,7 +38,8 @@ public class Level1 : MonoBehaviour
             case ObjectType.DifferentButton:
                 break;
             case ObjectType.ContinueButton:
-                    Manager.SceneSwitcher.LoadNextScene(SceneName.Two);
+                Pointer.Click -= Touchpad;
+                Manager.SceneSwitcher.LoadNextScene(SceneName.Two);
                 break;
             default:
                 throw new ArgumentOutOfRangeException("type", type, null);

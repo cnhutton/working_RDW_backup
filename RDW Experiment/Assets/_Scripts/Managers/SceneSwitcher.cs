@@ -11,10 +11,10 @@ public class SceneSwitcher : MonoBehaviour
     public void LoadNextScene()
     {
         if (_index >= SceneManager.sceneCountInBuildSettings) return;
-        SceneManager.LoadSceneAsync(_index + 1);
+        SceneManager.LoadScene(_index + 1, LoadSceneMode.Single);
         
         ++_index;
-        Debug.LogError("Loaded: " + _index);
+        Debug.Log("Loaded scene # " + _index);
     }
 
     public int CurrentSceneIndex()
@@ -27,22 +27,22 @@ public class SceneSwitcher : MonoBehaviour
         switch (name)
         {
             case SceneName.Zero:
-                SceneManager.LoadScene("0 Preload");
+                SceneManager.LoadScene("0 Preload", LoadSceneMode.Single);
                 break;
             case SceneName.One:
-                SceneManager.LoadScene("1 Intro");
+                SceneManager.LoadScene("1 Intro", LoadSceneMode.Single);
                 break;
             case SceneName.Two:
-                SceneManager.LoadScene("2 RDW Training");
+                SceneManager.LoadScene("2 RDW Training", LoadSceneMode.Single);
                 break;
             case SceneName.Three:
-                SceneManager.LoadScene("3 Calibration Training");
+                SceneManager.LoadScene("3 Calibration Training", LoadSceneMode.Single);
                 break;
             case SceneName.Four:
-                SceneManager.LoadScene("4 Calibration");
+                SceneManager.LoadScene("4 Calibration", LoadSceneMode.Single);
                 break;
             case SceneName.Five:
-                SceneManager.LoadScene("5 Walkthrough");
+                SceneManager.LoadScene("5 Walkthrough", LoadSceneMode.Single);
                 break;
             default:
                 throw new ArgumentOutOfRangeException("name", name, null);

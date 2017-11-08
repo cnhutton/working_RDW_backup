@@ -6,7 +6,7 @@ public class ExperimentManager : MonoBehaviour
 {
     private string _participantID;
     private bool _beginWithStaircase;
-    private const string Location = "C:/Users/hutton/Desktop";
+    private const string Location = "Assets/";
     private string _path;
     private string _FMS;
 
@@ -26,8 +26,7 @@ public class ExperimentManager : MonoBehaviour
         System.DateTime now = System.DateTime.Now;
         _participantID = now.Day.ToString() + now.Month.ToString() + now.Year.ToString() + now.Hour.ToString() +
                          now.Minute.ToString();
-        //_beginWithStaircase = LevelUtilities.GenerateRandomBool();
-        _beginWithStaircase = false;
+        _beginWithStaircase = LevelUtilities.GenerateRandomBool();
         _firstCalibrationCompleted = false;
         _firstWalkthroughCompleted = false;
         CreateFilePath();

@@ -28,8 +28,7 @@ public class SpawnManager : MonoBehaviour
     public Transform EastEdgeSpawn;
     public Transform SouthEdgeSpawn;
     public Transform WestEdgeSpawn;
-
-    //Need completion: continue button, motion sickness, path
+    
     public void PurpleFeet(Vector3 spawnPoint)
     {
         Instantiate(PurpleFeetPrefab, spawnPoint, Quaternion.identity);
@@ -145,9 +144,9 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void MotionSicknessUI()
+    public void MotionSicknessUI(out GameObject fms)
     {
-        Instantiate(MotionSicknessPrefab, NorthWallSpawn.position, Quaternion.identity);
+       fms = (GameObject)Instantiate(MotionSicknessPrefab, NorthWallSpawn.position, Quaternion.identity);
     }
 
     public void Path(bool spawnLeftTurn, Edge startEdge)
@@ -304,15 +303,19 @@ public class SpawnManager : MonoBehaviour
         {
             case Edge.North:
                 g.transform.position = NorthWallSpawn.position;
+                g.transform.rotation = Quaternion.identity;
                 break;
             case Edge.East:
                 g.transform.position = EastWallSpawn.position;
+                g.transform.rotation = Quaternion.Euler(0, 90, 0);
                 break;
             case Edge.South:
                 g.transform.position = SouthWallSpawn.position;
+                g.transform.rotation = Quaternion.Euler(0, 180, 0);
                 break;
             case Edge.West:
                 g.transform.position = WestWallSpawn.position;
+                g.transform.rotation = Quaternion.Euler(0, -90, 0);
                 break;
             default:
                 throw new ArgumentOutOfRangeException("edge", edge, null);
