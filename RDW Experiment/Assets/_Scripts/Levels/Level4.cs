@@ -32,24 +32,38 @@ public class Level4 : MonoBehaviour
     // ReSharper disable once ArrangeTypeMemberModifiers
     void Start()
     {
-        Manager.Sound.SetIndex(10);
         FindObjectOfType<Controller>().SetGain(0);
-        Manager.Spawn.PurpleFeet(PurpleFeetSpawn.position);
-        FeetObject.OnCollision += Feet;
-
         AlgorithmManager.Complete += Completed;
         _turnLeft = LevelUtilities.GenerateRandomBool();
         Manager.Experiment.GetAlgorithm(out _algorithm);
         Debug.Log(_algorithm);
         Manager.Algorithm.Initialize(_algorithm);
-        Manager.Sound.PlayNextVoiceover(); //#9 Experiment now begins, go to feet
-        Pointer.Click += Touchpad;
+
+        bool isFinal;
+        Manager.Experiment.WalkthroughStatus(out isFinal);
+
+        if (isFinal)
+        {
+            Manager.Spawn.PurpleFeet(PurpleFeetSpawn.position);
+            FeetObject.OnCollision += Feet;
+            Manager.Sound.PlaySpecificVoiceover(3); // move to purple footprints
+            Manager.Sound.SetIndex(14);
+        }
+        else
+        {
+            Manager.Sound.SetIndex(13);
+            SetupInitialCalibration();
+            Manager.Sound.PlayNextVoiceover(); // Turn to face the arrow
+            Manager.Sound.PlayNextVoiceover(2.3f); //The calibration will now begin
+        }
         
+        Pointer.Click += Touchpad;
     }
 
     // ReSharper disable once MemberCanBeMadeStatic.Local
     private void Feet()
     {
+        Manager.Sound.PlayNextVoiceover(1.0f); //The calibration will now begin
         FeetObject.OnCollision -= Feet;
         SetupInitialCalibration();
     }
@@ -110,7 +124,9 @@ public class Level4 : MonoBehaviour
         switch (type)
         {
             case ObjectType.FMS:
+                UpdateFMS();
                 Pointer.Click -= Touchpad;
+                FindObjectOfType<FMS>().Shutdown();
                 Manager.SceneSwitcher.LoadNextScene(SceneName.Five);
                 break;
             case ObjectType.SameButton:
@@ -130,6 +146,7 @@ public class Level4 : MonoBehaviour
 
     private void Completed()
     {
+        AlgorithmManager.Complete -= Completed;
         _paintingEast.SetActive(false);
         _paintingWest.SetActive(false);
         _discernmentEast.SetActive(false);
@@ -139,6 +156,7 @@ public class Level4 : MonoBehaviour
 
         CompleteFile();
         SetupFMS();
+        Manager.Sound.PlayNextVoiceover(); //Please submit your rating
     }
 
     private void SetupFile()
@@ -197,8 +215,10 @@ public class Level4 : MonoBehaviour
     private void SetupFMS()
     {
         Manager.Spawn.MotionSicknessUI(out fms);
+        FindObjectOfType<FMS>().Initialize();
+
         System.DateTime now = System.DateTime.Now;
-        string line = "\nWALKTHROUGH PHASE\n" +
+        string line = "\nCALIBRATION PHASE\n" +
                       "Algorithm: " + (_algorithm == AlgorithmType.Staircase ? "Staircase" : "PEST") + "\n" +
                       "Start Time: " + now.Hour.ToString() + ":" + now.Minute.ToString() + "\n\n";
         Manager.Experiment.WriteToFMS(line);

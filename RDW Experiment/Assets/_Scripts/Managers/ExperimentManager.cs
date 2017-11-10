@@ -124,16 +124,6 @@ public class ExperimentManager : MonoBehaviour
         WriteToFMS(line);
     }
 
-    private void ResponseFMS(int response)
-    {
-        valueFMS = response;
-    }
-
-    public void GetFMSResponse(out int response)
-    {
-        response = valueFMS;
-    }
-
     public void WalkthroughCompleted()
     {
         _finalWalkthrough = true;
@@ -142,6 +132,11 @@ public class ExperimentManager : MonoBehaviour
     public void WalkthroughStatus(out bool isFinal)
     {
         isFinal = _finalWalkthrough;
+    }
+
+    public void CalibrationStatus(out bool isFirst)
+    {
+        isFirst = _firstCalibrationCompleted;
     }
     
 }

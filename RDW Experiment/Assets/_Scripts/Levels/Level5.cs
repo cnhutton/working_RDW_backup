@@ -28,7 +28,7 @@ public class Level5 : MonoBehaviour
 
     void Start()
     {
-        Manager.Sound.SetIndex(11);
+        Manager.Sound.SetIndex(16);
         FindObjectOfType<Controller>().SetGain(0);
 
         _startingEdge = LevelUtilities.ChooseRandomEdge();
@@ -40,21 +40,15 @@ public class Level5 : MonoBehaviour
 
         useIndividualized = LevelUtilities.GenerateRandomBool();
         usePositive = LevelUtilities.GenerateRandomBool();
-        Manager.Sound.PlayNextVoiceover(2.0f); //#13 position & follow path
+        Manager.Sound.PlayNextVoiceover(2.0f); //Position yourself on the footprints then follow path
         count = 0;
         totalCount = 0;
 
-        //Manager.Experiment.GetWalkthroughAlgorithm(out algorithm);
-        //Manager.Experiment.GetThreshold(algorithm, out positiveAlg, out negativeAlg);
-
-        algorithm = AlgorithmType.PEST;
-        Manager.Experiment.SetThresholdPEST(0.553f, -0.28f);
-        Manager.Experiment.SetThresholdStaircase(0.553f, -0.28f);
+        Manager.Experiment.GetWalkthroughAlgorithm(out algorithm);
+        Manager.Experiment.GetThreshold(algorithm, out positiveAlg, out negativeAlg);
 
         negativeAvg = -0.2f;
         positiveAvg = 0.4f;
-        positiveAlg = 0.553f;
-        negativeAlg = -0.28f;
         gain = 0;
         SetupFMSFile();
         playonce = true;
@@ -79,7 +73,7 @@ public class Level5 : MonoBehaviour
         buttons.SetActive(true);
         if (playonce)
         {
-            Manager.Sound.PlaySpecificVoiceover(12);
+            Manager.Sound.PlaySpecificVoiceover(17); //If your virtual rotation matched
             playonce = false;
         }
 
@@ -92,8 +86,11 @@ public class Level5 : MonoBehaviour
         Manager.Spawn.Path(_turnLeft, _startingEdge, out path);
         Manager.Spawn.Endpoint(_endingEdge, out endpoint);
         Manager.Spawn.DiscernmentButtons(_endingEdge, out buttons);
+        Manager.Spawn.MotionSicknessUI(out fms);
+        fms.SetActive(false);
         buttons.SetActive(false);
         EndpointObject.OnCollision += Endpoint;
+        
 
         if (useIndividualized)
         {
@@ -108,7 +105,9 @@ public class Level5 : MonoBehaviour
     private void SetupPath()
     {
         path.SetActive(true);
-        Manager.Sound.PlaySpecificVoiceover(13);
+        Manager.Sound.PlaySpecificVoiceover(18); // Please turn to the center of the room
+        Manager.Sound.PlaySpecificVoiceover(19, 2.2f); // Position yourself on the purple footprints
+        Manager.Sound.PlaySpecificVoiceover(20, 3.2f); // Follow the path to the endpoint
         _turnLeft = !_turnLeft;
         _startingEdge = _endingEdge;
 
@@ -147,10 +146,18 @@ public class Level5 : MonoBehaviour
         {
             case ObjectType.FMS:
                 UpdateFMS();
+                FindObjectOfType<FMS>().Shutdown();
                 if (totalCount == 4 && !isFinal)
                 {
                     Pointer.Click -= Touchpad;
+                    Manager.Experiment.WalkthroughCompleted();
                     Manager.SceneSwitcher.LoadNextScene(SceneName.Four);
+                }
+                if (totalCount == 4 & isFinal)
+                {
+                    Pointer.Click -= Touchpad;
+                    Debug.Log("EXPERIMENT COMPLETE");
+                    return;
                 }
                 fms.SetActive(false);
                 SetupPath();
@@ -178,12 +185,12 @@ public class Level5 : MonoBehaviour
         buttons.SetActive(false);
 
         fms.SetActive(true);
+        FindObjectOfType<FMS>().Initialize();
+        Manager.Sound.PlaySpecificVoiceover(21); //Please submit your rating
     }
 
     private void SetupFMSFile()
     {
-        Manager.Spawn.MotionSicknessUI(out fms);
-        fms.SetActive(false);
         System.DateTime now = System.DateTime.Now;
         string line = "\nWALKTHROUGH PHASE\n" +
                       "Algorithm: " + (algorithm == AlgorithmType.Staircase ? "Staircase" : "PEST") + "\n" +

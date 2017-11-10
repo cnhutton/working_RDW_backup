@@ -7,7 +7,7 @@ public class Level1 : MonoBehaviour
     public Transform PurpleFeetSpawn;
     public Transform ContinueSpawn;
 
-    private GameObject _button;
+    private GameObject _fms;
 
     // ReSharper disable once UnusedMember.Local
     // ReSharper disable once ArrangeTypeMemberModifiers
@@ -15,15 +15,15 @@ public class Level1 : MonoBehaviour
     {
         Manager.Spawn.PurpleFeet(PurpleFeetSpawn.position);
         FeetObject.OnCollision += Feet;
-        Manager.Sound.PlayNextVoiceover(2.0f);
+        Manager.Sound.PlayNextVoiceover(2.0f); //Welcome to the VE 
     }
 
     private void Feet()
     {
         FeetObject.OnCollision -= Feet;
         Pointer.Click += Touchpad;
-        Manager.Sound.PlayNextVoiceover();
-        StartCoroutine(WaitToSpawn());
+        Manager.Sound.PlayNextVoiceover(); //In your hand is your controller
+        StartCoroutine(WaitToSpawn(17.5f));
 
     }
 
@@ -32,23 +32,26 @@ public class Level1 : MonoBehaviour
         switch (type)
         {
             case ObjectType.FMS:
+                FindObjectOfType<FMS>().Shutdown();
+                Pointer.Click -= Touchpad;
+                Manager.SceneSwitcher.LoadNextScene(SceneName.Two);
                 break;
             case ObjectType.SameButton:
                 break;
             case ObjectType.DifferentButton:
                 break;
             case ObjectType.ContinueButton:
-                Pointer.Click -= Touchpad;
-                Manager.SceneSwitcher.LoadNextScene(SceneName.Two);
                 break;
             default:
                 throw new ArgumentOutOfRangeException("type", type, null);
         }
     }
 
-    private IEnumerator WaitToSpawn()
+    private IEnumerator WaitToSpawn(float delay)
     {
-        yield return new WaitForSeconds(10.0f);
-        Manager.Spawn.ContinueButton(Direction.North, out _button);
+        yield return new WaitForSeconds(delay);
+        Manager.Sound.PlayNextVoiceover(); //At some points, you will see this interface
+        Manager.Spawn.MotionSicknessUI(out _fms);
+        FindObjectOfType<FMS>().Initialize();
     }
 }

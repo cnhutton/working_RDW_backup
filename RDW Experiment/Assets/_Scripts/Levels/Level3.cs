@@ -20,6 +20,7 @@ public class Level3 : MonoBehaviour
     private GameObject _arrowRight;
     private GameObject _proceedEast;
     private GameObject _proceedWest;
+    private GameObject fms;
 
     private bool _turnLeft;
     private bool _trainingComplete;
@@ -27,22 +28,22 @@ public class Level3 : MonoBehaviour
 
     void Start()
     {
-        Manager.Sound.SetIndex(6);
+        Manager.Sound.SetIndex(8);
         FindObjectOfType<Controller>().SetGain(0);
         Manager.Spawn.PurpleFeet(PurpleFeetSpawn.position);
         FeetObject.OnCollision += Feet;
         _turnLeft = LevelUtilities.GenerateRandomBool();
         _trainingComplete = false;
-        Manager.Sound.PlayNextVoiceover(1.0f); //#6 position purple
+        Manager.Sound.PlayNextVoiceover(1.0f); //Position on purple
     }
 
     private void Feet()
     {
         FeetObject.OnCollision -= Feet;
         Pointer.Click += Touchpad;
-        Manager.Sound.PlayNextVoiceover(); //#7 calibration info
+        Manager.Sound.PlayNextVoiceover(); //To determine how much redirection to apply
         SetupInitialCalibration();
-        Manager.Sound.PlayNextVoiceover(5f); //#8 after turning
+        Manager.Sound.PlayNextVoiceover(5f); //After turning, make selection
     }
 
     private void SetupInitialCalibration()
@@ -88,7 +89,7 @@ public class Level3 : MonoBehaviour
         _turnLeft = !_turnLeft;
         if (!_trainingComplete)
         {
-            Manager.Sound.PlayNextVoiceover(1.0f); //#9 practice until comfortable then continue
+            Manager.Sound.PlayNextVoiceover(1.0f); //#Practice until comfortable then continue
             _trainingComplete = true;
         }
 
@@ -109,6 +110,10 @@ public class Level3 : MonoBehaviour
         switch (type)
         {
             case ObjectType.FMS:
+                UpdateFMS();
+                Pointer.Click -= Touchpad;
+                FindObjectOfType<FMS>().Shutdown();
+                Manager.SceneSwitcher.LoadNextScene(SceneName.Four);
                 break;
             case ObjectType.SameButton:
                 SetupCalibration();
@@ -117,8 +122,8 @@ public class Level3 : MonoBehaviour
                 SetupCalibration();
                 break;
             case ObjectType.ContinueButton:
-                Pointer.Click -= Touchpad;
-                Manager.SceneSwitcher.LoadNextScene(SceneName.Four);
+                SetupFMS();
+                Manager.Sound.PlayNextVoiceover(); //Please submit your rating
                 break;
             default:
                 throw new ArgumentOutOfRangeException("type", type, null);
@@ -132,6 +137,34 @@ public class Level3 : MonoBehaviour
         float angle = turn ? 90f : -90f;
         Room.transform.RotateAround(Vector3.zero, axis, angle);
         SteamVR_Fade.Start(Color.clear, 1.2f);
+    }
+
+    private void SetupFMS()
+    {
+        _paintingEast.SetActive(false);
+        _paintingWest.SetActive(false);
+        _arrowLeft.SetActive(false);
+        _arrowRight.SetActive(false);
+        _discernmentEast.SetActive(false);
+        _discernmentWest.SetActive(false);
+        _proceedEast.SetActive(false);
+        _proceedWest.SetActive(false);
+
+        Manager.Spawn.MotionSicknessUI(out fms);
+        FindObjectOfType<FMS>().Initialize();
+
+        System.DateTime now = System.DateTime.Now;
+        string line = "\nEND OF TRAINING\n" +
+                      "Start Time: " + now.Hour.ToString() + ":" + now.Minute.ToString() + "\n";
+        Manager.Experiment.WriteToFMS(line);
+    }
+
+    private void UpdateFMS()
+    {
+        float rating;
+        FindObjectOfType<FMS>().GetRating(out rating);
+        string line = "FMS: " + rating + "\n";
+        Manager.Experiment.WriteToFMS(line);
     }
 }
 

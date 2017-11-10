@@ -16,7 +16,7 @@ public class Level2 : MonoBehaviour
     void Start()
     {
         FindObjectOfType<Controller>().SetGain(0);
-        Manager.Sound.SetIndex(2);
+        Manager.Sound.SetIndex(3);
         _completed = false;
 
         _startingEdge = LevelUtilities.ChooseRandomEdge();
@@ -26,14 +26,14 @@ public class Level2 : MonoBehaviour
         FeetObject.OnCollision += Feet;
         Pointer.Click += Touchpad;
         
-        Manager.Sound.PlayNextVoiceover(2.0f);
+        Manager.Sound.PlayNextVoiceover(1.0f); //Please position yourself on the purple footprints
     }
 
     private void Feet()
     {
         FeetObject.OnCollision -= Feet;
-        StartCoroutine(SetupPath(1.0f));
-        Manager.Sound.PlayNextVoiceover(1.0f); //voiceover #3
+        StartCoroutine(SetupPath(19.0f, true));
+        Manager.Sound.PlayNextVoiceover(1.0f); // This experiment conerns redirected walking
     }
 
     private void Endpoint()
@@ -42,16 +42,17 @@ public class Level2 : MonoBehaviour
         if (_completed)
         {
             Manager.Spawn.ContinueButton(_endingEdge, out button);
-            Manager.Sound.PlayNextVoiceover(); //voiceover #5
+            Manager.Sound.PlayNextVoiceover(); //Select continue to proceed
         }
         else
         {
             FindObjectOfType<Controller>().SetGain(0);
-            Manager.Sound.PlayNextVoiceover(); //voiceover #4 turn to center
+            Manager.Sound.PlayNextVoiceover(); //Please turn to the center
+            Manager.Sound.PlayNextVoiceover(2.3f); //Redirection will again be applied 
             _turnLeft = !_turnLeft;
             _startingEdge = _endingEdge;
             _completed = true;
-            StartCoroutine(SetupPath(1.0f));
+            StartCoroutine(SetupPath(9.0f, false));
         }
     }
 
@@ -74,14 +75,17 @@ public class Level2 : MonoBehaviour
         }
     }
 
-    private IEnumerator SetupPath(float delay)
+    private IEnumerator SetupPath(float delay, bool first)
     {
         _endingEdge = LevelUtilities.EndpointEdge(_startingEdge, _turnLeft);
-        yield return new WaitForSeconds(delay);
-        Manager.Spawn.Path(_turnLeft, _startingEdge);
+        yield return new WaitForSeconds(1.0f);
+        if (first)
+        {
+            Manager.Spawn.Path(_turnLeft, _startingEdge);
+        }
         Manager.Spawn.Endpoint(_endingEdge);
         EndpointObject.OnCollision += Endpoint;
-        StartCoroutine(SetGain(2.0f));
+        StartCoroutine(SetGain(delay));
     }
 
     private IEnumerator SetGain(float delay)
