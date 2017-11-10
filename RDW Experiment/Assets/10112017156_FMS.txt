@@ -1,0 +1,36 @@
+Participant: 10112017156
+Date: 10/11/2017
+Start Time: 15:6
+
+
+Participant: 10112017156
+Date: 10/11/2017
+Start Time: 15:6
+
+
+
+CALIBRATION PHASE
+Algorithm: PEST
+Start Time: 15:7
+
+
+FMS: 4
+
+
+WALKTHROUGH PHASE
+Algorithm: PEST
+Start Time: 15:7
+
+
+Individualized: No
+Positive Threshold: No
+Gain Applied: 0
+Response: Same
+FMS: 5
+
+Individualized: No
+Positive Threshold: Yes
+Gain Applied: 0
+Response: Same
+FMS: 6
+

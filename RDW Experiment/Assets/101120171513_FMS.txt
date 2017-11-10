@@ -1,0 +1,49 @@
+Participant: 101120171513
+Date: 10/11/2017
+Start Time: 15:13
+
+
+
+END OF TRAINING
+Start Time: 15:17
+
+FMS: 13
+
+
+CALIBRATION PHASE
+Algorithm: Staircase
+Start Time: 15:22
+
+
+FMS: 6
+
+
+WALKTHROUGH PHASE
+Algorithm: Staircase
+Start Time: 15:22
+
+
+Individualized: No
+Positive Threshold: No
+Gain Applied: 0
+Response: Different
+FMS: 2
+
+Individualized: No
+Positive Threshold: Yes
+Gain Applied: 0
+Response: Different
+FMS: 0
+
+Individualized: Yes
+Positive Threshold: No
+Gain Applied: 0
+Response: Same
+FMS: 0
+
+Individualized: Yes
+Positive Threshold: Yes
+Gain Applied: 0
+Response: Different
+FMS: 0
+

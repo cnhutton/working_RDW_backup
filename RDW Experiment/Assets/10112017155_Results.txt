@@ -1,0 +1,13 @@
+Participant: 10112017155
+Date: 10/11/2017
+Start Time: 15:5
+
+
+CALIBRATION PHASE 
+Algorithm: Staircase
+Start Time: 15:5
+Negative Threshold: No
+Turn direction: Right
+Turn count: 1
+Current Gain: 0.89
+

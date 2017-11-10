@@ -31,8 +31,11 @@ public class Level5 : MonoBehaviour
         Manager.Sound.SetIndex(16);
         FindObjectOfType<Controller>().SetGain(0);
 
-        _startingEdge = LevelUtilities.ChooseRandomEdge();
-        _turnLeft = LevelUtilities.GenerateRandomBool();
+        //_startingEdge = LevelUtilities.ChooseRandomEdge();
+        //_turnLeft = LevelUtilities.GenerateRandomBool();
+
+        _startingEdge = Edge.North;
+        _turnLeft = true;
 
         Manager.Spawn.PurpleFeet(_startingEdge);
         FeetObject.OnCollision += Feet;

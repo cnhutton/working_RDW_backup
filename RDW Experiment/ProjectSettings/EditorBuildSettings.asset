@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/0 Preload.unity
     guid: bc95fe6852d550f41a2721111dd81bb6
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/1 Intro.unity
     guid: 3563a5245cf657d4fb112b93c58c32b4
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/2 RDW Training.unity
     guid: ef44037e34fd3254cad5ea74de65db14
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/3 Calibration Training.unity
     guid: 805ca278be5c0c54bae3e66d87f57989
   - enabled: 1

@@ -19,8 +19,11 @@ public class Level2 : MonoBehaviour
         Manager.Sound.SetIndex(3);
         _completed = false;
 
-        _startingEdge = LevelUtilities.ChooseRandomEdge();
-        _turnLeft = LevelUtilities.GenerateRandomBool();
+        //_startingEdge = LevelUtilities.ChooseRandomEdge();
+        //_turnLeft = LevelUtilities.GenerateRandomBool();
+
+        _startingEdge = Edge.North;
+        _turnLeft = true;
 
         Manager.Spawn.PurpleFeet(_startingEdge);
         FeetObject.OnCollision += Feet;

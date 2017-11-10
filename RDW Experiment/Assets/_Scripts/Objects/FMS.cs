@@ -26,7 +26,6 @@ public class FMS : MonoBehaviour
         Pointer.UpdateSlide += UpdateUI;
 
         value = 0;
-        Slider.transform.position = StartPosition.position;
         _initialized = true;
     }
 
