@@ -44,6 +44,15 @@ public class SceneSwitcher : MonoBehaviour
             case SceneName.Five:
                 SceneManager.LoadScene("5 Walkthrough", LoadSceneMode.Single);
                 break;
+            case SceneName.Break1:
+                SceneManager.LoadScene("4 Calibration Break 1", LoadSceneMode.Single);
+                break;
+            case SceneName.Break2:
+                SceneManager.LoadScene("4 Calibration Break 2", LoadSceneMode.Single);
+                break;
+            case SceneName.Break3:
+                SceneManager.LoadScene("5 Walkthrough Break 1", LoadSceneMode.Single);
+                break;
             default:
                 throw new ArgumentOutOfRangeException("name", name, null);
         }

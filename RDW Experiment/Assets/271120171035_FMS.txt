@@ -1,0 +1,38 @@
+Participant: 271120171035
+Date: 27/11/2017
+Start Time: 10:35
+
+
+Participant: 271120171035
+Date: 27/11/2017
+Start Time: 10:35
+
+
+
+CALIBRATION PHASE
+Algorithm: Staircase
+Start Time: 10:36
+
+
+FMS: 2
+
+
+CALIBRATION PHASE
+Algorithm: PEST
+Start Time: 10:38
+
+
+FMS: 6
+
+
+WALKTHROUGH PHASE
+Algorithm: Staircase
+Start Time: 10:40
+
+
+Individualized: No
+Positive Threshold: No
+Gain Applied: 0
+Response: Same
+FMS: 3
+

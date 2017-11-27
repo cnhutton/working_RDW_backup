@@ -208,7 +208,7 @@ MonoBehaviour:
   VoiceoverClips:
   - {fileID: 8300000, guid: 01607031573210f40aef909202898ac8, type: 3}
   - {fileID: 8300000, guid: 4729635b909808b4fbc7e84844179a0b, type: 3}
-  - {fileID: 8300000, guid: a4f9b472eccd39d4aae0799da30402b0, type: 3}
+  - {fileID: 8300000, guid: a00d35b3d2aee164a947bc9c00f8cc33, type: 3}
   - {fileID: 8300000, guid: d8061bbc45b65764a8a4247cd7a7d0aa, type: 3}
   - {fileID: 8300000, guid: 136998984142ba54e969cf72c084e62a, type: 3}
   - {fileID: 8300000, guid: a8af548625c57ba48a5d795b8e00bca5, type: 3}
@@ -228,6 +228,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 61d8c2e7be712804aad4c94c147fcd63, type: 3}
   - {fileID: 8300000, guid: 0bf9636bbe6743640a3814780f6c8e13, type: 3}
   - {fileID: 8300000, guid: c4062743616fa3d4bbe2620b072826d4, type: 3}
+  BreakClip: {fileID: 8300000, guid: d9c6e8bdcc2708747baf929083b3f238, type: 3}
 --- !u!114 &1327437159
 MonoBehaviour:
   m_ObjectHideFlags: 0

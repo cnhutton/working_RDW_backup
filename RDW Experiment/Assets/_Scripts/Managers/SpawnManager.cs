@@ -55,6 +55,27 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    public void PurpleFeet(Edge edge, out GameObject feet) //
+    {
+        switch (edge)
+        {
+            case Edge.North:
+                feet = Instantiate(PurpleFeetPrefab, NorthEdgeSpawn.position, Quaternion.Euler(0, 180, 0));
+                break;
+            case Edge.East:
+                feet = Instantiate(PurpleFeetPrefab, EastEdgeSpawn.position, Quaternion.Euler(0, -90, 0));
+                break;
+            case Edge.South:
+                feet = Instantiate(PurpleFeetPrefab, SouthEdgeSpawn.position, Quaternion.identity);
+                break;
+            case Edge.West:
+                feet = Instantiate(PurpleFeetPrefab, WestEdgeSpawn.position, Quaternion.Euler(0, 90, 0));
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("edge", edge, null);
+        }
+    }
+
     public void ProceedButton(Direction wall, out GameObject button)
     {
         switch (wall)
@@ -342,4 +363,5 @@ public class SpawnManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException("wall", wall, null);
         }
     }
+    
 }

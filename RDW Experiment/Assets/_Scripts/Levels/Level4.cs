@@ -28,10 +28,13 @@ public class Level4 : MonoBehaviour
 
     private int _turnCount;
 
+    private bool _completed;
+
     [UsedImplicitly]
     // ReSharper disable once ArrangeTypeMemberModifiers
     void Start()
     {
+        _completed = false;
         FindObjectOfType<Controller>().SetGain(0);
         AlgorithmManager.Complete += Completed;
         _turnLeft = LevelUtilities.GenerateRandomBool();
@@ -58,6 +61,7 @@ public class Level4 : MonoBehaviour
         }
         
         Pointer.Click += Touchpad;
+        Manager.Experiment.GetCalibrationCompleted(out _completed);
     }
 
     // ReSharper disable once MemberCanBeMadeStatic.Local
@@ -127,7 +131,13 @@ public class Level4 : MonoBehaviour
                 UpdateFMS();
                 Pointer.Click -= Touchpad;
                 FindObjectOfType<FMS>().Shutdown();
-                Manager.SceneSwitcher.LoadNextScene(SceneName.Five);
+                if (!_completed)
+                {
+                    Manager.SceneSwitcher.LoadNextScene(SceneName.Break1);
+                }
+                else
+                    Manager.SceneSwitcher.LoadNextScene(SceneName.Break2);
+
                 break;
             case ObjectType.SameButton:
                 Manager.Algorithm.Response = Feedback.Same;

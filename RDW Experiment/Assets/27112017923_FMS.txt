@@ -1,0 +1,19 @@
+Participant: 27112017923
+Date: 27/11/2017
+Start Time: 9:23
+
+
+
+END OF TRAINING
+Start Time: 9:30
+
+FMS: 0
+
+
+CALIBRATION PHASE
+Algorithm: PEST
+Start Time: 9:32
+
+
+FMS: 0
+

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Level5 : MonoBehaviour
@@ -23,18 +24,23 @@ public class Level5 : MonoBehaviour
     private GameObject endpoint;
     private GameObject buttons;
     private GameObject fms;
+    private GameObject feet;
 
     private bool playonce;
+
+    private int fullCount = 4;
+
+    private string _gainString;
 
     void Start()
     {
         Manager.Sound.SetIndex(16);
         FindObjectOfType<Controller>().SetGain(0);
+        
+        _startingEdge = Edge.East;
+        _turnLeft = true;
 
-        _startingEdge = LevelUtilities.ChooseRandomEdge();
-        _turnLeft = LevelUtilities.GenerateRandomBool();
-
-        Manager.Spawn.PurpleFeet(_startingEdge);
+        Manager.Spawn.PurpleFeet(_startingEdge, out feet);
         FeetObject.OnCollision += Feet;
         Pointer.Click += Touchpad;
 
@@ -48,8 +54,9 @@ public class Level5 : MonoBehaviour
         Manager.Experiment.GetThreshold(algorithm, out positiveAlg, out negativeAlg);
 
         negativeAvg = -0.2f;
-        positiveAvg = 0.4f;
+        positiveAvg = 0.49f;
         gain = 0;
+        _gainString = gain.ToString();
         SetupFMSFile();
         playonce = true;
     }
@@ -62,11 +69,12 @@ public class Level5 : MonoBehaviour
 
     private void Endpoint()
     {
+        EndpointObject.OnCollision -= Endpoint;
         FindObjectOfType<Controller>().SetGain(0);
         gain = 0;
         ++count;
         ++totalCount;
-        EndpointObject.OnCollision -= Endpoint;
+        
         endpoint.SetActive(false);
 
         Manager.Spawn.MoveDiscernmentButtons(buttons, _endingEdge);
@@ -99,17 +107,19 @@ public class Level5 : MonoBehaviour
         else
             gain = usePositive ? positiveAvg : negativeAvg;
 
+        Debug.Log(gain);
+        _gainString = gain.ToString();
         FindObjectOfType<Controller>().SetGain(gain);
     }
 
     private void SetupPath()
     {
-        path.SetActive(true);
-        Manager.Sound.PlaySpecificVoiceover(18); // Please turn to the center of the room
-        Manager.Sound.PlaySpecificVoiceover(19, 2.2f); // Position yourself on the purple footprints
-        Manager.Sound.PlaySpecificVoiceover(20, 3.2f); // Follow the path to the endpoint
         _turnLeft = !_turnLeft;
         _startingEdge = _endingEdge;
+        path.SetActive(true);
+        Manager.Sound.PlaySpecificVoiceover(18);
+        Manager.Sound.PlaySpecificVoiceover(20, 2.2f); // Follow the path to the endpoint
+        
 
         if (count == 2)
         {
@@ -130,7 +140,8 @@ public class Level5 : MonoBehaviour
             gain = usePositive ? positiveAvg : negativeAvg;
 
         Debug.Log(gain);
-        FindObjectOfType<Controller>().SetGain(gain);
+        _gainString = gain.ToString();
+        StartCoroutine(SetGain());
 
         _endingEdge = LevelUtilities.EndpointEdge(_startingEdge, _turnLeft);
         Manager.Spawn.Endpoint(_endingEdge, out endpoint);
@@ -147,13 +158,15 @@ public class Level5 : MonoBehaviour
             case ObjectType.FMS:
                 UpdateFMS();
                 FindObjectOfType<FMS>().Shutdown();
-                if (totalCount == 4 && !isFinal)
+                EndpointObject.OnCollision -= Endpoint;
+                if (totalCount == fullCount && !isFinal)
                 {
                     Pointer.Click -= Touchpad;
                     Manager.Experiment.WalkthroughCompleted();
-                    Manager.SceneSwitcher.LoadNextScene(SceneName.Four);
+                    Manager.SceneSwitcher.LoadNextScene(SceneName.Break3);
+                    return;
                 }
-                if (totalCount == 4 & isFinal)
+                if (totalCount == fullCount & isFinal)
                 {
                     Pointer.Click -= Touchpad;
                     Debug.Log("EXPERIMENT COMPLETE");
@@ -204,7 +217,7 @@ public class Level5 : MonoBehaviour
         FindObjectOfType<FMS>().GetRating(out rating);
         string line = "Individualized: " + (useIndividualized ? "Yes" : "No") + "\n" +
                       "Positive Threshold: " + (usePositive ? "Yes" : "No") + "\n" +
-                      "Gain Applied: " + gain.ToString() + "\n" +
+                      "Gain Applied: " + _gainString + "\n" +
                       "Response: " + (response == Feedback.Same ? "Same" : "Different") + "\n" +
                       "FMS: " + rating + "\n";
         Manager.Experiment.WriteToFMS(line);
@@ -231,5 +244,11 @@ public class Level5 : MonoBehaviour
                       "Turn direction: " + (_turnLeft ? "Left" : "Right") + "\n" +
                       "Turn count: " + totalCount + "\n";
         Manager.Experiment.WriteToFile(line);
+    }
+
+    private IEnumerator SetGain()
+    {
+        yield return new WaitForSeconds(1.0f);
+        FindObjectOfType<Controller>().SetGain(gain);
     }
 }

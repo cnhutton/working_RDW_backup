@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public List<AudioClip> VoiceoverClips;
+    public AudioClip BreakClip;
     private int _numberOfClips;
     private AudioSource _audioSource;
     private int _index;
@@ -103,10 +104,17 @@ public class SoundManager : MonoBehaviour
         if (_index >= _numberOfClips) return;
         StartCoroutine(PlayVoiceover(i, delay));
     }
-    
+
     public void SetIndex(int i)
     {
         _index = i;
+    }
+
+    public void PlayBreakVoiceover()
+    {
+
+        _audioSource.clip = BreakClip;
+        _audioSource.Play();
     }
 
 }

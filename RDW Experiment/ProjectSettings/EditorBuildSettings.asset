@@ -8,18 +8,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/0 Preload.unity
     guid: bc95fe6852d550f41a2721111dd81bb6
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/1 Intro.unity
     guid: 3563a5245cf657d4fb112b93c58c32b4
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/2 RDW Training.unity
     guid: ef44037e34fd3254cad5ea74de65db14
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/3 Calibration Training.unity
     guid: 805ca278be5c0c54bae3e66d87f57989
   - enabled: 1
     path: Assets/_Scenes/4 Calibration.unity
     guid: 62393c56e154f5741a7f441c00472722
   - enabled: 1
+    path: Assets/_Scenes/4 Calibration Break 1.unity
+    guid: c9004ea6087610a45a8105775d53a478
+  - enabled: 1
+    path: Assets/_Scenes/4 Calibration Break 2.unity
+    guid: cd80c687cc18a464a8b814a43ad813a9
+  - enabled: 1
     path: Assets/_Scenes/5 Walkthrough.unity
     guid: 660823d3520003f419eb41ff7822f7a6
+  - enabled: 1
+    path: Assets/_Scenes/5 Walkthrough Break 1.unity
+    guid: 00d4bee3bf14a184c94594d5315c97fd

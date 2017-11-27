@@ -45,6 +45,11 @@ public class ExperimentManager : MonoBehaviour
         }
     }
 
+    public void GetCalibrationCompleted(out bool completed)
+    {
+        completed = _firstCalibrationCompleted;
+    }
+
     public void GetWalkthroughAlgorithm(out AlgorithmType algorithm)
     {
         if (_firstWalkthroughCompleted)

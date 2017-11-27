@@ -1,0 +1,81 @@
+Participant: 271120171047
+Date: 27/11/2017
+Start Time: 10:47
+
+
+
+CALIBRATION PHASE
+Algorithm: PEST
+Start Time: 10:47
+
+
+FMS: 5
+
+
+CALIBRATION PHASE
+Algorithm: Staircase
+Start Time: 10:49
+
+
+FMS: 6
+
+
+WALKTHROUGH PHASE
+Algorithm: PEST
+Start Time: 10:51
+
+
+Individualized: No
+Positive Threshold: No
+Gain Applied: 0
+Response: Same
+FMS: 5
+
+Individualized: No
+Positive Threshold: Yes
+Gain Applied: 0
+Response: Same
+FMS: 0
+
+Individualized: Yes
+Positive Threshold: No
+Gain Applied: 0
+Response: Same
+FMS: 6
+
+Individualized: Yes
+Positive Threshold: Yes
+Gain Applied: 0
+Response: Same
+FMS: 7
+
+
+WALKTHROUGH PHASE
+Algorithm: Staircase
+Start Time: 10:54
+
+
+Individualized: Yes
+Positive Threshold: Yes
+Gain Applied: 0
+Response: Same
+FMS: 10
+
+Individualized: Yes
+Positive Threshold: No
+Gain Applied: 0
+Response: Same
+FMS: 10
+
+Individualized: No
+Positive Threshold: Yes
+Gain Applied: 0
+Response: Different
+FMS: 6
+
+Individualized: No
+Positive Threshold: No
+Gain Applied: 0
+Response: Same
+FMS: 8
+

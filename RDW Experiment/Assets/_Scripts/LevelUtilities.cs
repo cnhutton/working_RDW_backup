@@ -78,5 +78,20 @@ public class LevelUtilities
         }
     }
 
-
+    public static Edge NextEdge(Edge current)
+    {
+        switch (current)
+        {
+            case Edge.North:
+                return Edge.South;
+            case Edge.East:
+                return Edge.West;
+            case Edge.South:
+                return Edge.North;
+            case Edge.West:
+                return Edge.East;
+            default:
+                throw new ArgumentOutOfRangeException("current", current, null);
+        }
+    }
 }

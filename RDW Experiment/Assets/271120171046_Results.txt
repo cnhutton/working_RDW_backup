@@ -1,0 +1,13 @@
+Participant: 271120171046
+Date: 27/11/2017
+Start Time: 10:46
+
+
+CALIBRATION PHASE 
+Algorithm: PEST
+Start Time: 10:47
+Negative Threshold: No
+Turn direction: Right
+Turn count: 1
+Current Gain: 0.79
+

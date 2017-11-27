@@ -1,0 +1,18 @@
+Participant: 271120171026
+Date: 27/11/2017
+Start Time: 10:26
+
+
+Participant: 271120171026
+Date: 27/11/2017
+Start Time: 10:26
+
+
+
+CALIBRATION PHASE
+Algorithm: Staircase
+Start Time: 10:27
+
+
+FMS: 3
+

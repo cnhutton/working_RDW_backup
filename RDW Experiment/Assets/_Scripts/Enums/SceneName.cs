@@ -5,5 +5,8 @@
     Two,
     Three,
     Four,
-    Five
+    Five,
+    Break1,
+    Break2,
+    Break3
 }
