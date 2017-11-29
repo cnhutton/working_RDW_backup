@@ -1,0 +1,27 @@
+Participant: 281120171711
+Date: 28/11/2017
+Start Time: 17:11
+
+
+
+END OF TRAINING
+Start Time: 17:12
+
+FMS: 10
+
+
+CALIBRATION PHASE
+Algorithm: Staircase
+Start Time: 17:16
+
+
+FMS: 20
+
+
+CALIBRATION PHASE
+Algorithm: PEST
+Start Time: 17:17
+
+
+FMS: 13
+

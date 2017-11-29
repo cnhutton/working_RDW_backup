@@ -1,0 +1,27 @@
+Participant: 281120171428
+Date: 28/11/2017
+Start Time: 14:28
+
+
+
+CALIBRATION PHASE
+Algorithm: Staircase
+Start Time: 14:33
+
+
+FMS: 0
+
+
+CALIBRATION PHASE
+Algorithm: PEST
+Start Time: 14:36
+
+
+FMS: 0
+
+
+WALKTHROUGH PHASE
+Algorithm: Staircase
+Start Time: 14:42
+
+

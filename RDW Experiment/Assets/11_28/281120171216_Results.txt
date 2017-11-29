@@ -1,0 +1,320 @@
+Participant: 281120171216
+Date: 28/11/2017
+Start Time: 12:16
+
+
+CALIBRATION PHASE 
+Algorithm: Staircase
+Start Time: 12:21
+Negative Threshold: No
+Turn direction: Left
+Turn count: 1
+Current Gain: 0.89
+
+Time: 12:21
+Previous response: Different
+Negative Threshold: No
+Turn direction: Right
+Turn count: 2
+Current Gain: 0.79
+
+Time: 12:21
+Previous response: Different
+Negative Threshold: No
+Turn direction: Left
+Turn count: 3
+Current Gain: 0.69
+
+Time: 12:21
+Previous response: Different
+Negative Threshold: No
+Turn direction: Right
+Turn count: 4
+Current Gain: 0.59
+
+Time: 12:22
+Previous response: Different
+Negative Threshold: No
+Turn direction: Left
+Turn count: 5
+Current Gain: 0.49
+
+Time: 12:22
+Previous response: Different
+Negative Threshold: No
+Turn direction: Right
+Turn count: 6
+Current Gain: 0.39
+
+Time: 12:22
+Previous response: Same
+Negative Threshold: No
+Turn direction: Left
+Turn count: 7
+Current Gain: 0.49
+
+Time: 12:22
+Previous response: Same
+Negative Threshold: No
+Turn direction: Right
+Turn count: 8
+Current Gain: 0.59
+
+Time: 12:22
+Previous response: Different
+Negative Threshold: No
+Turn direction: Left
+Turn count: 9
+Current Gain: 0.49
+
+Time: 12:22
+Previous response: Same
+Negative Threshold: No
+Turn direction: Right
+Turn count: 10
+Current Gain: 0.59
+
+Time: 12:22
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Left
+Turn count: 11
+Current Gain: -0.4
+
+Time: 12:23
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 12
+Current Gain: -0.3
+
+Time: 12:23
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Left
+Turn count: 13
+Current Gain: -0.2
+
+Time: 12:23
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 14
+Current Gain: -0.1
+
+Time: 12:23
+Previous response: Same
+Negative Threshold: Yes
+Turn direction: Left
+Turn count: 15
+Current Gain: -0.2
+
+Time: 12:23
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 16
+Current Gain: -0.1
+
+Time: 12:23
+Previous response: Same
+Negative Threshold: Yes
+Turn direction: Left
+Turn count: 17
+Current Gain: -0.2
+
+Time: 12:24
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 18
+Current Gain: -0.1
+
+Time: 12:24
+Previous response: Same
+Total turn count: 18
+Final gain, positive: 0
+Final gain, negative: 0
+
+
+Time: 12:24
+Previous response: Same
+Negative Threshold: No
+Turn direction: Left
+Turn count: 19
+Current Gain: -0.1
+
+CALIBRATION PHASE 
+Algorithm: PEST
+Start Time: 12:26
+Negative Threshold: No
+Turn direction: Right
+Turn count: 1
+Current Gain: 0.79
+
+Time: 12:26
+Previous response: Different
+Negative Threshold: No
+Turn direction: Left
+Turn count: 2
+Current Gain: 0.158
+
+Time: 12:26
+Previous response: Same
+Negative Threshold: No
+Turn direction: Right
+Turn count: 3
+Current Gain: 0.316
+
+Time: 12:27
+Previous response: Same
+Negative Threshold: No
+Turn direction: Left
+Turn count: 4
+Current Gain: 0.395
+
+Time: 12:27
+Previous response: Different
+Negative Threshold: No
+Turn direction: Right
+Turn count: 5
+Current Gain: 0.316
+
+Time: 12:27
+Previous response: Same
+Negative Threshold: No
+Turn direction: Left
+Turn count: 6
+Current Gain: 0.395
+
+Time: 12:27
+Previous response: Different
+Negative Threshold: No
+Turn direction: Right
+Turn count: 7
+Current Gain: 0.237
+
+Time: 12:27
+Previous response: Same
+Negative Threshold: No
+Turn direction: Left
+Turn count: 8
+Current Gain: 0.316
+
+Time: 12:27
+Previous response: Different
+Negative Threshold: No
+Turn direction: Right
+Turn count: 9
+Current Gain: 0.237
+
+Time: 12:27
+Previous response: Same
+Negative Threshold: Yes
+Turn direction: Left
+Turn count: 10
+Current Gain: -0.4
+
+Time: 12:28
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 11
+Current Gain: -0.08
+
+Time: 12:28
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Left
+Turn count: 12
+Current Gain: 0
+
+Time: 12:28
+Previous response: Same
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 13
+Current Gain: -0.08
+
+Time: 12:28
+Previous response: Same
+Negative Threshold: Yes
+Turn direction: Left
+Turn count: 14
+Current Gain: -0.12
+
+Time: 12:28
+Previous response: Same
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 15
+Current Gain: -0.16
+
+Time: 12:28
+Previous response: Same
+Negative Threshold: Yes
+Turn direction: Left
+Turn count: 16
+Current Gain: -0.2
+
+Time: 12:28
+Previous response: Same
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 17
+Current Gain: -0.24
+
+Time: 12:29
+Previous response: Different
+Total turn count: 17
+Final gain, positive: 0.158
+Final gain, negative: -0.2
+
+
+Time: 12:29
+Previous response: Different
+Negative Threshold: No
+Turn direction: Left
+Turn count: 18
+Current Gain: -0.2
+
+Walkthrough PHASE 
+Algorithm: Staircase
+Start Time: 12:29
+Turn direction: Left
+Turn count: 0
+
+Time: 12:31
+Response: Different
+Gain applied: 0
+Individualized gain used: Yes
+Turn direction: Right
+Turn count: 4
+
+Walkthrough PHASE 
+Algorithm: PEST
+Start Time: 12:31
+Turn direction: Left
+Turn count: 0
+
+Time: 12:31
+Response: Different
+Gain applied: 0
+Individualized gain used: Yes
+Turn direction: Left
+Turn count: 1
+
+Time: 12:32
+Response: Different
+Gain applied: 0
+Individualized gain used: No
+Turn direction: Left
+Turn count: 3
+
+Time: 12:32
+Response: Different
+Gain applied: 0
+Individualized gain used: No
+Turn direction: Right
+Turn count: 4
+
