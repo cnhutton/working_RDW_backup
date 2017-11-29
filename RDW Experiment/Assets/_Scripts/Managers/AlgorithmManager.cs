@@ -270,12 +270,12 @@ public class AlgorithmManager : MonoBehaviour
                 if (_negativeTest)
                 {
                     Debug.Log("Negative staircase complete");
+                    _negativeTest = false;
+                    Manager.Experiment.SetThresholdStaircase(_positiveThreshold, ReversalList.Average());
                     if (Complete != null)
                     {
                         Complete();
                     }
-                    _negativeTest = false;
-                    Manager.Experiment.SetThresholdStaircase(_positiveThreshold, ReversalList.Average());
                     return;
                 }
                 else

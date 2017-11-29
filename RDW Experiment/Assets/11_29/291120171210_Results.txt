@@ -1,0 +1,32 @@
+Participant: 291120171210
+Date: 29/11/2017
+Start Time: 12:10
+
+
+Walkthrough PHASE 
+Algorithm: PEST
+Start Time: 12:10
+Turn direction: Left
+Turn count: 0
+
+Time: 12:11
+Response: Same
+Gain applied: 0
+Individualized gain used: No
+Turn direction: Left
+Turn count: 1
+
+Time: 12:11
+Response: Same
+Gain applied: 0
+Individualized gain used: No
+Turn direction: Right
+Turn count: 2
+
+Time: 12:12
+Response: Same
+Gain applied: 0
+Individualized gain used: Yes
+Turn direction: Left
+Turn count: 3
+

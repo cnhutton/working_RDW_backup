@@ -277,10 +277,30 @@
     <None Include="Assets\11_28\281120171448_Results.txt" />
     <None Include="Assets\11_28\281120171452_FMS.txt" />
     <None Include="Assets\11_28\281120171452_Results.txt" />
-    <None Include="Assets\281120171650_FMS.txt" />
-    <None Include="Assets\281120171650_Results.txt" />
-    <None Include="Assets\281120171711_FMS.txt" />
-    <None Include="Assets\281120171711_Results.txt" />
+    <None Include="Assets\11_28\281120171650_FMS.txt" />
+    <None Include="Assets\11_28\281120171650_Results.txt" />
+    <None Include="Assets\11_28\281120171711_FMS.txt" />
+    <None Include="Assets\11_28\281120171711_Results.txt" />
+    <None Include="Assets\11_29\291120171118_FMS.txt" />
+    <None Include="Assets\11_29\291120171118_Results.txt" />
+    <None Include="Assets\11_29\291120171149_FMS.txt" />
+    <None Include="Assets\11_29\291120171149_Results.txt" />
+    <None Include="Assets\11_29\291120171210_FMS.txt" />
+    <None Include="Assets\11_29\291120171210_Results.txt" />
+    <None Include="Assets\11_29\29112017920_FMS.txt" />
+    <None Include="Assets\11_29\29112017920_Results.txt" />
+    <None Include="Assets\291120171226_FMS.txt" />
+    <None Include="Assets\291120171226_Results.txt" />
+    <None Include="Assets\291120171227_FMS.txt" />
+    <None Include="Assets\291120171227_Results.txt" />
+    <None Include="Assets\291120171238_FMS.txt" />
+    <None Include="Assets\291120171238_Results.txt" />
+    <None Include="Assets\291120171315_FMS.txt" />
+    <None Include="Assets\291120171315_Results.txt" />
+    <None Include="Assets\291120171316_FMS.txt" />
+    <None Include="Assets\291120171316_Results.txt" />
+    <None Include="Assets\29112017152_FMS.txt" />
+    <None Include="Assets\29112017152_Results.txt" />
     <None Include="Assets\RDWT-master\Assets\RDW Toolkit\readme.txt" />
     <None Include="Assets\RDWT-master\ProjectSettings\ProjectVersion.txt" />
     <None Include="Assets\SimEval Experiment\Materials\Velvet\Velvet.shader" />
@@ -295,6 +315,8 @@
     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
     <None Include="Assets\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
     <None Include="Assets\SteamVR\readme.txt" />
+    <None Include="Assets\_Audio\29112017920_FMS.txt" />
+    <None Include="Assets\_Audio\29112017920_Results.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

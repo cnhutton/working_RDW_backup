@@ -50,9 +50,17 @@ public class Level5 : MonoBehaviour
         count = 0;
         totalCount = 0;
 
+        float a, b, c, d;
+        Manager.Experiment.GetThreshold(AlgorithmType.PEST, out a, out b);
+        Manager.Experiment.GetThreshold(AlgorithmType.Staircase, out c, out d);
+        Debug.Log("Values: " + a + "positive PEST, " + b + "negative PEST, " + c + "positive stair " + d + "negative stair");
+
         Manager.Experiment.GetWalkthroughAlgorithm(out algorithm);
         Manager.Experiment.GetThreshold(algorithm, out positiveAlg, out negativeAlg);
-
+        
+        //algorithm = AlgorithmType.PEST;
+        //positiveAlg = 0.632f;
+        //negativeAlg = -0.28f;
         negativeAvg = -0.2f;
         positiveAvg = 0.49f;
         gain = 0;
