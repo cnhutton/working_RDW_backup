@@ -1,0 +1,87 @@
+Participant: 1122017943
+Date: 1/12/2017
+Start Time: 9:43
+
+
+
+END OF TRAINING
+Start Time: 9:49
+
+FMS: 1
+
+
+CALIBRATION PHASE
+Algorithm: Staircase
+Start Time: 9:57
+
+
+FMS: 3
+
+
+CALIBRATION PHASE
+Algorithm: PEST
+Start Time: 10:1
+
+
+FMS: 2
+
+
+WALKTHROUGH PHASE
+Algorithm: Staircase
+Start Time: 10:2
+
+
+Individualized: No
+Positive Threshold: No
+Gain Applied: -0.2
+Response: Same
+FMS: 1
+
+Individualized: No
+Positive Threshold: Yes
+Gain Applied: 0.49
+Response: Same
+FMS: 1
+
+Individualized: Yes
+Positive Threshold: No
+Gain Applied: -0.35
+Response: Different
+FMS: 2
+
+Individualized: Yes
+Positive Threshold: Yes
+Gain Applied: 1.206667
+Response: Different
+FMS: 1
+
+
+WALKTHROUGH PHASE
+Algorithm: PEST
+Start Time: 10:4
+
+
+Individualized: Yes
+Positive Threshold: No
+Gain Applied: -0.36
+Response: Different
+FMS: 3
+
+Individualized: Yes
+Positive Threshold: Yes
+Gain Applied: 0.711
+Response: Same
+FMS: 0
+
+Individualized: No
+Positive Threshold: No
+Gain Applied: -0.2
+Response: Same
+FMS: 0
+
+Individualized: No
+Positive Threshold: Yes
+Gain Applied: 0.49
+Response: Same
+FMS: 0
+

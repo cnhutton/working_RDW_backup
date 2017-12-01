@@ -105,8 +105,10 @@ public class Level5 : MonoBehaviour
         Manager.Spawn.Endpoint(_endingEdge, out endpoint);
         Manager.Spawn.DiscernmentButtons(_endingEdge, out buttons);
         Manager.Spawn.MotionSicknessUI(out fms);
+
         //Manager.Spawn.MotionSicknessUI(Direction.North, out fmsNorth);
         //Manager.Spawn.MotionSicknessUI(Direction.West, out fmsWest);
+
         fms.SetActive(false);
         buttons.SetActive(false);
         EndpointObject.OnCollision += Endpoint;
@@ -208,6 +210,11 @@ public class Level5 : MonoBehaviour
         path.SetActive(false);
         endpoint.SetActive(false);
         buttons.SetActive(false);
+
+        //if (true)
+        //{
+
+        //}
 
         fms.SetActive(true);
         FindObjectOfType<FMS>().Initialize();
