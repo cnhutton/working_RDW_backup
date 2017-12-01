@@ -20,6 +20,8 @@ public class AlgorithmManager : MonoBehaviour
     private float _maxStimulusRange;
     private float _std;
     private int _count;
+    private int _countStair;
+    private int _maxCountStair;
     private int _maxCount;
     private List<float> gains = new List<float>();
     private List<Feedback> feedback = new List<Feedback>();
@@ -40,11 +42,14 @@ public class AlgorithmManager : MonoBehaviour
     public void Initialize(AlgorithmType algorithm)
     {
         _currentGain = _negativeTest ? -0.4f : 0.79f;
+        _maxStimulusRange = _currentGain * 2;    //Max gain value to try
 
         switch (algorithm)
         {
             case AlgorithmType.Staircase:
                 Zn = _negativeTest ? 0.0f : 1.0f;
+                _countStair = 0;
+                _maxCountStair = 15;
                 _stepSize = 0.1f;
                 MaxReversals = 6;
                 ReversalNum = 0;
@@ -54,7 +59,6 @@ public class AlgorithmManager : MonoBehaviour
             case AlgorithmType.PEST:
                 _count = 0;
                 _maxCount = 9;
-                _maxStimulusRange = _currentGain * 2;    //Max gain value to try
                 _std = _numLevels / 5;                //Reasonable estimation of slope (can be adjusted)
 
                 //Initialize prob of positive response and negative responses from the psychometric function
@@ -87,6 +91,7 @@ public class AlgorithmManager : MonoBehaviour
         {
             case AlgorithmType.Staircase:
                 Staircase();
+                ++_countStair;
                 FindObjectOfType<Controller>().SetGain(_currentGain);
                 break;
             case AlgorithmType.PEST:
@@ -133,11 +138,11 @@ public class AlgorithmManager : MonoBehaviour
             { //when multiple indices have same max prob set p2
                 p2 = i;
             }
-            
+
         }
         //average in case there are multiple max probs
         _stimulusLevel = (int)Mathf.Floor((p1 + p2) / 2);
-        
+
     }
 
     private void PEST()
@@ -198,7 +203,6 @@ public class AlgorithmManager : MonoBehaviour
             if (_negativeTest)
             {
                 Debug.Log("Negative PEST complete, maxCount exceeded");
-                Debug.Log(Response);
                 Manager.Experiment.SetThresholdPEST(_positiveThreshold, _currentGain);
                 if (Complete != null)
                 {
@@ -209,7 +213,6 @@ public class AlgorithmManager : MonoBehaviour
             else
             {
                 Debug.Log("Positive PEST complete, maxCount exceeded");
-                Debug.Log(Response);
                 _positiveThreshold = _currentGain;
                 _negativeTest = true;
                 Initialize(AlgorithmType.PEST);
@@ -286,10 +289,53 @@ public class AlgorithmManager : MonoBehaviour
                     Initialize(AlgorithmType.Staircase);
                 }
             }
+
+            else if (_countStair > _maxCountStair)
+            {
+                if (_negativeTest)
+                {
+                    Debug.Log("Negative staircase complete, maxCount exceeded");
+                    _negativeTest = false;
+                    Manager.Experiment.SetThresholdStaircase(_positiveThreshold, ReversalList.Average());
+                    if (Complete != null)
+                    {
+                        Complete();
+                    }
+                    return;
+                }
+                else
+                {
+                    Debug.Log("Positive staircase complete, maxCount exceeded");
+                    _positiveThreshold = ReversalList.Average();
+                    _negativeTest = true;
+                    Initialize(AlgorithmType.Staircase);
+                }
+            }
         }
 
         Zn = newZ;
         _currentGain -= _stepSize * (2 * Zn - 1);
+
+        if (_negativeTest)
+        {
+            if (_currentGain > 0)
+                _currentGain = -0.01f;
+            else if (_currentGain < _maxStimulusRange)
+            {
+                _currentGain = _maxStimulusRange;
+            }
+        }
+        else
+        {
+            if (_currentGain < 0)
+                _currentGain = 0.01f;
+            else if (_currentGain > _maxStimulusRange)
+            {
+                _currentGain = _maxStimulusRange;
+            }
+        }
+
+
         Debug.Log(_currentGain);
     }
 

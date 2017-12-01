@@ -170,6 +170,27 @@ public class SpawnManager : MonoBehaviour
        fms = (GameObject)Instantiate(MotionSicknessPrefab, NorthWallSpawn.position, Quaternion.identity);
     }
 
+    public void MotionSicknessUI(Direction wall, out GameObject fms)
+    {
+        switch (wall)
+        {
+            case Direction.North:
+                fms = (GameObject)Instantiate(MotionSicknessPrefab, NorthWallSpawn.position, Quaternion.identity);
+                break;
+            case Direction.East:
+                fms = (GameObject)Instantiate(MotionSicknessPrefab, EastWallSpawn.position, Quaternion.Euler(0, 90, 0));
+                break;
+            case Direction.South:
+                fms = (GameObject)Instantiate(MotionSicknessPrefab, SouthWallSpawn.position, Quaternion.Euler(0, 180, 0));
+                break;
+            case Direction.West:
+                fms = (GameObject)Instantiate(MotionSicknessPrefab, WestWallSpawn.position, Quaternion.Euler(0, -90, 0));
+                break;
+            default:
+                throw new ArgumentOutOfRangeException("wall", wall, null);
+        }
+    }
+
     public void Path(bool spawnLeftTurn, Edge startEdge)
     {
         switch (startEdge)
@@ -274,7 +295,6 @@ public class SpawnManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException("edge", edge, null);
         }
     }
-
 
     public void DiscernmentButtons(Direction wall, out GameObject buttons)
     {

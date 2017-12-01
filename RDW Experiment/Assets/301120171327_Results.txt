@@ -1,0 +1,62 @@
+Participant: 301120171327
+Date: 30/11/2017
+Start Time: 13:27
+
+
+CALIBRATION PHASE 
+Algorithm: Staircase
+Start Time: 13:32
+Negative Threshold: No
+Turn direction: Left
+Turn count: 1
+Current Gain: 0.89
+
+Time: 13:32
+Previous response: Different
+Negative Threshold: No
+Turn direction: Right
+Turn count: 2
+Current Gain: 0.79
+
+Time: 13:32
+Previous response: Same
+Negative Threshold: No
+Turn direction: Left
+Turn count: 3
+Current Gain: 0.89
+
+Time: 13:32
+Previous response: Same
+Negative Threshold: No
+Turn direction: Right
+Turn count: 4
+Current Gain: 0.9900001
+
+Time: 13:32
+Previous response: Different
+Negative Threshold: No
+Turn direction: Left
+Turn count: 5
+Current Gain: 0.89
+
+Time: 13:32
+Previous response: Different
+Negative Threshold: No
+Turn direction: Right
+Turn count: 6
+Current Gain: 0.79
+
+Time: 13:32
+Previous response: Same
+Negative Threshold: No
+Turn direction: Left
+Turn count: 7
+Current Gain: 0.89
+
+Time: 13:32
+Previous response: Different
+Negative Threshold: Yes
+Turn direction: Right
+Turn count: 8
+Current Gain: -0.4
+

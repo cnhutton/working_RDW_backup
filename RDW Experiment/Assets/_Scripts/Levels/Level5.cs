@@ -24,6 +24,8 @@ public class Level5 : MonoBehaviour
     private GameObject endpoint;
     private GameObject buttons;
     private GameObject fms;
+    private GameObject fmsNorth;
+    private GameObject fmsWest;
     private GameObject feet;
 
     private bool playonce;
@@ -103,6 +105,8 @@ public class Level5 : MonoBehaviour
         Manager.Spawn.Endpoint(_endingEdge, out endpoint);
         Manager.Spawn.DiscernmentButtons(_endingEdge, out buttons);
         Manager.Spawn.MotionSicknessUI(out fms);
+        //Manager.Spawn.MotionSicknessUI(Direction.North, out fmsNorth);
+        //Manager.Spawn.MotionSicknessUI(Direction.West, out fmsWest);
         fms.SetActive(false);
         buttons.SetActive(false);
         EndpointObject.OnCollision += Endpoint;
