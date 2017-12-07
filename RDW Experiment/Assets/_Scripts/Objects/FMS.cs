@@ -18,6 +18,8 @@ public class FMS : MonoBehaviour
 
     private bool _initialized;
 
+    private bool _north;
+
 
     public void Initialize()
     {
@@ -28,6 +30,21 @@ public class FMS : MonoBehaviour
         value = 0;
         Slider.transform.position = StartPosition.position;
         _initialized = true;
+        label.text = value.ToString();
+        _north = true;
+    }
+
+    public void Initialize(bool north)
+    {
+        Pointer.Hover += Hovering;
+        Pointer.BeginSlide += StartSlide;
+        Pointer.UpdateSlide += UpdateUI;
+
+        value = 0;
+        Slider.transform.position = StartPosition.position;
+        _initialized = true;
+        label.text = value.ToString();
+        _north = north;
     }
 
     public void Shutdown()
@@ -37,6 +54,7 @@ public class FMS : MonoBehaviour
         Pointer.UpdateSlide -= UpdateUI;
         
         _initialized = false;
+        _north = true;
     }
 
     private void Hovering(bool entered)
@@ -60,6 +78,44 @@ public class FMS : MonoBehaviour
             return;
         Vector3 displacement = position - startPoint;
         float change = Mathf.Floor(displacement.magnitude * 20f);
+        if (!_north)
+        {
+            if (displacement.z < 0)
+            {
+                change = change * -1;
+            }
+        }
+        else
+        {
+            if (displacement.x < 0)
+            {
+                change = change * -1;
+            }
+        }
+
+        value = initialOffset + change;
+
+        if (value < 0)
+            value = 0;
+        if (value > 20)
+            value = 20;
+
+        if (_north)
+        {
+            UpdatePosition();
+        }
+        else
+        {
+            UpdatePositionWest();
+        }
+    }
+
+    private void UpdateUIWest(Vector3 position)
+    {
+        if (!_initialized)
+            return;
+        Vector3 displacement = position - startPoint;
+        float change = Mathf.Floor(displacement.magnitude * 20f);
         if (displacement.x < 0)
         {
             change = change * -1;
@@ -71,7 +127,14 @@ public class FMS : MonoBehaviour
         if (value > 20)
             value = 20;
 
-        UpdatePosition();
+        if (_north)
+        {
+            UpdatePosition();
+        }
+        else
+        {
+            UpdatePositionWest();
+        }
     }
 
     private void UpdatePosition()
@@ -90,6 +153,26 @@ public class FMS : MonoBehaviour
         else
         {
             Vector3 newPosition = new Vector3(StartPosition.position.x + (value / 10), StartPosition.position.y, StartPosition.position.z);
+            Slider.transform.position = newPosition;
+        }
+    }
+
+    private void UpdatePositionWest()
+    {
+        label.text = value.ToString();
+        if (value == 0)
+        {
+            Slider.transform.position = StartPosition.position;
+            return;
+        }
+        else if (value == 20)
+        {
+            Slider.transform.position = EndPosition.position;
+            return;
+        }
+        else
+        {
+            Vector3 newPosition = new Vector3(StartPosition.position.x, StartPosition.position.y, StartPosition.position.z + (value / 10));
             Slider.transform.position = newPosition;
         }
     }

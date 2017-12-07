@@ -55,7 +55,7 @@ public class Level5 : MonoBehaviour
         float a, b, c, d;
         Manager.Experiment.GetThreshold(AlgorithmType.PEST, out a, out b);
         Manager.Experiment.GetThreshold(AlgorithmType.Staircase, out c, out d);
-        Debug.Log("Values: " + a + "positive PEST, " + b + "negative PEST, " + c + "positive stair " + d + "negative stair");
+        Debug.Log("Values: " + a + " positive PEST, " + b + " negative PEST, " + c + " positive stair " + d + " negative stair");
 
         Manager.Experiment.GetWalkthroughAlgorithm(out algorithm);
         Manager.Experiment.GetThreshold(algorithm, out positiveAlg, out negativeAlg);
@@ -63,6 +63,7 @@ public class Level5 : MonoBehaviour
         //algorithm = AlgorithmType.PEST;
         //positiveAlg = 0.632f;
         //negativeAlg = -0.28f;
+
         negativeAvg = -0.2f;
         positiveAvg = 0.49f;
         gain = 0;
@@ -104,12 +105,14 @@ public class Level5 : MonoBehaviour
         Manager.Spawn.Path(_turnLeft, _startingEdge, out path);
         Manager.Spawn.Endpoint(_endingEdge, out endpoint);
         Manager.Spawn.DiscernmentButtons(_endingEdge, out buttons);
-        Manager.Spawn.MotionSicknessUI(out fms);
 
-        //Manager.Spawn.MotionSicknessUI(Direction.North, out fmsNorth);
-        //Manager.Spawn.MotionSicknessUI(Direction.West, out fmsWest);
+        //Manager.Spawn.MotionSicknessUI(out fms);
 
-        fms.SetActive(false);
+        Manager.Spawn.MotionSicknessUI(Direction.North, out fmsNorth);
+        Manager.Spawn.MotionSicknessUI(Direction.West, out fmsWest);
+
+        fmsNorth.SetActive(false);
+        fmsWest.SetActive(false);
         buttons.SetActive(false);
         EndpointObject.OnCollision += Endpoint;
         
@@ -186,7 +189,9 @@ public class Level5 : MonoBehaviour
                     Debug.Log("EXPERIMENT COMPLETE");
                     return;
                 }
-                fms.SetActive(false);
+                fmsNorth.SetActive(false);
+                fmsWest.SetActive(false);
+                //fms.SetActive(false);
                 SetupPath();
                 break;
             case ObjectType.SameButton:
@@ -211,13 +216,19 @@ public class Level5 : MonoBehaviour
         endpoint.SetActive(false);
         buttons.SetActive(false);
 
-        //if (true)
-        //{
+        if (_endingEdge == Edge.South)
+        {
+            fmsNorth.SetActive(true);
+            FindObjectOfType<FMS>().Initialize(true);
+        }
+        if (_endingEdge == Edge.East)
+        {
+            fmsWest.SetActive(true);
+            FindObjectOfType<FMS>().Initialize(false);
+        }
 
-        //}
-
-        fms.SetActive(true);
-        FindObjectOfType<FMS>().Initialize();
+        //fms.SetActive(true);
+        
         Manager.Sound.PlaySpecificVoiceover(21); //Please submit your rating
     }
 
@@ -267,7 +278,7 @@ public class Level5 : MonoBehaviour
 
     private IEnumerator SetGain()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         FindObjectOfType<Controller>().SetGain(gain);
     }
 }
