@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDW Experiment", "RDW Experiment.csproj", "{31877B44-9159-E55A-9008-AA35A38A238C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDW Experiment.Editor", "RDW Experiment.Editor.csproj", "{EB68898E-0190-7FF7-054D-B18B635F5E6E}"
